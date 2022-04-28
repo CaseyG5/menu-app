@@ -28,3 +28,49 @@ MENU
 
 */
 
+/*
+menu object
+    menu selection 
+    constructor()
+    showMenuOptions()
+        wait for selection
+*/
+
+class Menu {
+    constructor() {
+        this.allCharacters = [];
+    }
+
+    start() {
+        let selection = this.showOptions();
+
+        while( selection != 4) {
+            switch( selection ) {
+                case "1":
+                    this.createCharacter();
+                    break;
+                case "2":
+                    this.displayCharacters();
+                    break;
+                case "3":
+                    this.deleteCharacter();
+                    break;
+                default:
+                    alert("Invalid selection. Please try again.");
+            }
+            selection = this.showOptions();
+        }
+
+        alert("Farewell!");
+    }
+
+    showOptions() {
+        return prompt(
+            `Make your selection:
+
+             1) Create new character
+             2) Show all characters
+             3) Delete a character
+             4) Exit`);
+    }
+}
