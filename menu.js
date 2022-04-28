@@ -73,4 +73,81 @@ class Menu {
              3) Delete a character
              4) Exit`);
     }
+
+    createCharacter() {
+        // prompt for character name and info
+        let name = prompt("Enter a name for your character: ");
+        let attributeValues = [0, 0, 0, 0]
+        let strOfValues = prompt("Now enter integer values for your character's attributes " +
+                "for power, toughness, intelligence and charisma, " +
+                "with a total of up to 10");
+
+        // take a string of values and split them        
+        let arrOfValues = strOfValues.split(" ");
+
+        // make sure there are 4 values
+        if(arrOfValues.length != 4) {
+            alert("Invalid input. Please try again.");
+            return;
+        }
+
+        // then copy them to the Attributes array
+        // and round down in case they are not integers
+        for( let i = 0; i < 4; i++ ) {
+            attributeValues[i] = Math.floor( Number(arrOfValues[i]) );
+        }
+
+        // then make sure total <= 10
+        if( attributeValues.reduce( (prev, current) => (prev + current) ) > 10 ) {
+            alert("Attribute values exceed 10. Please try again.");
+            return;
+        }
+
+        // add a new character to the set
+        this.allCharacters.push(new Character(name, 
+                            attributeValues[0], attributeValues[1], 
+                            attributeValues[2], attributeValues[3]) );
+        
+        // inform user
+        alert(`Character "${name}" has been created.`);
+    }
+
+    
 }
+
+/*
+character object
+    name
+    power
+    toughness
+    intellect
+    charisma
+
+    constructor/create()
+    delete()
+*/
+
+class Character {
+    constructor(name, power, toughness, intelligence, charisma) {
+
+        this.name = name;
+        this.power = power;
+        this.toughness = toughness;
+        this.intelligence = intelligence;
+        this.charisma = charisma;
+    }
+
+    getCharacterInfo() {
+        return `${this.name}
+            Power: ${this.power}   Toughness: ${this.toughness}
+            Intelligence: ${this.intelligence}   Charisma: ${this.charisma}
+            ----------` + "\n";
+    }
+}
+
+// upon script initialization,
+// make array of characters
+
+let menu = new Menu();
+
+menu.start();
