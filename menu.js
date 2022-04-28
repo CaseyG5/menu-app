@@ -42,9 +42,12 @@ class Menu {
     }
 
     start() {
-        let selection = this.showOptions();
+        // show menu options and get user selection
+        let selection = this.showMenuOptions();  
 
+        // while user hasn't decided to exit, continue...
         while( selection != 4) {
+
             switch( selection ) {
                 case "1":
                     this.createCharacter();
@@ -58,13 +61,13 @@ class Menu {
                 default:
                     alert("Invalid selection. Please try again.");
             }
-            selection = this.showOptions();
+            selection = this.showMenuOptions();  // get next menu selection
         }
 
         alert("Farewell!");
     }
 
-    showOptions() {
+    showMenuOptions() {
         return prompt(
             `Make your selection:
 
@@ -159,14 +162,14 @@ class Menu {
 
 /*
 character object
-    name
-    power
-    toughness
-    intellect
-    charisma
+    name: string
+    power: number
+    toughness: number
+    intellect: number
+    charisma: number
 
-    constructor/create()
-    delete()
+    constructor()
+    getInfo()
 */
 
 class Character {
@@ -179,6 +182,7 @@ class Character {
         this.charisma = charisma;
     }
 
+    // return string with character name & info
     getCharacterInfo() {
         return `${this.name}
             Power: ${this.power}   Toughness: ${this.toughness}
@@ -187,8 +191,8 @@ class Character {
     }
 }
 
-// upon script initialization,
-// make array of characters
+
+// Create a Menu object and start the app
 
 let menu = new Menu();
 
