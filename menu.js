@@ -112,7 +112,49 @@ class Menu {
         alert(`Character "${name}" has been created.`);
     }
 
-    
+    displayCharacters() {
+        
+        if( this.charactersExist() ) {       // if there are characters to display
+
+            let strOfCharacters = "";
+
+            // assemble string with all characters and their info
+            for( let i = 0; i < this.getCharacterCount(); i++ ) {
+                strOfCharacters += `${i}) ` + this.allCharacters[i].getCharacterInfo();
+            }
+
+            // list all characters & info
+            alert("These are the characters we have: \n\n" + strOfCharacters);     
+        }
+
+    }
+
+    deleteCharacter() {
+
+        if( this.charactersExist() ) {        // if there are characters to delete
+
+            // prompt for character ID to delete
+            let id = prompt("Enter the ID of the character you want to delete: ");
+            if( id > -1 && id < this.getCharacterCount() )
+                this.allCharacters.splice(id, 1);
+            else alert("No character exists with that ID.");
+        }
+
+    }
+
+    // returns the # of characters we have
+    getCharacterCount() {
+        return this.allCharacters.length;
+    }
+
+    // returns a boolean for whether we have at least 1 character
+    charactersExist() {
+        if( this.getCharacterCount() == 0 ) {
+            alert("There are no characters to display/delete.");
+            return false;
+        }
+        return true;   
+    }
 }
 
 /*
